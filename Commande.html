@@ -1,0 +1,134 @@
+<!DOCTYPE html> 
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GETNOW - Commandez sans carte</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f9f9f9;
+}
+header {
+    background: #27ae60;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+header p {
+    margin: 5px 0 0;
+}
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+h2 {
+    color: #2c3e50;
+}
+label {
+    display: block;
+    margin-top: 10px;
+}
+input, textarea, button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button {
+    background: #27ae60;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+}
+button:hover {
+    background: #2ecc71;
+}
+.hidden {
+    display: none;
+}
+section {
+    margin-bottom: 30px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>GETNOW</h1>
+    <p>Achetez en ligne sans carte bancaire</p>
+</header>
+
+<main>
+    <section>
+        <h2>Bienvenue chez GETNOW</h2>
+        <p>Nous commandons vos produits en ligne pour vous, vous payez en especes, MonCash ou virement bancaire. Remplissez le formulaire ci-dessous pour passer votre commande facilement</p>
+    </section>
+
+    <section>
+        <a href="Accueil.html" class="btn">Page d'accueil</a>
+        <h2>Formulaire de commande</h2>
+        <form id="orderForm">
+            <label for="nom">Nom complet *</label>
+            <input type="text" id="nom" name="nom" required>
+
+            <label for="tel">Telephone (WhatsApp) *</label>
+            <input type="tel" id="tel" name="tel" required>
+
+            <label for="tel">Email*</label>
+            <input type="tel" id="tel" name="tel" required>
+
+            <label for="description">Description / lien du produit *</label>
+            <textarea id="description" name="description" rows="3" required></textarea>
+
+            <label for="photos">Photos du produit</label>
+            <input type="file" id="photos" name="photos" multiple accept="image/*">
+
+            <button type="submit">Envoyer ma commande</button>
+        </form>
+
+        <div id="confirmation" class="hidden">
+            <h3>Merci pour votre commande</h3>
+            <p>Nous avons bien recu votre demande. Nous vous contacterons sous peu pour confirmer les details.</p>
+        </div>
+    </section>
+</main>
+
+<script>
+document.getElementById('orderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const data = {
+        nom: document.getElementById("nom").value,
+        telephone: document.getElementById("tel").value,
+        email: document.getElementById("tel").value, // même champ que téléphone ici
+        description: document.getElementById("description").value
+    };
+
+fetch("https://script.google.com/macros/s/AKfycbx6btsX1gaw0GKWgsCsnt6-EoicOr2V-84kFRy7eHkUKKkljnCZdN9Q-m9opleWM1uy/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    this.classList.add('hidden');
+    document.getElementById('confirmation').classList.remove('hidden');
+});
+</script>
+
+</body>
+</html>
